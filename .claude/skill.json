@@ -1,0 +1,17 @@
+{
+  "name": "agent-ready",
+  "description": "Score a repo on agent-readiness and emit PR-sized fixes.",
+  "triggers": [
+    "agent readiness",
+    "is my repo agent ready",
+    "cli audit",
+    "score this project"
+  ],
+  "commands": [
+    {"name": "score", "summary": "Score repos on agent-readiness"},
+    {"name": "explain", "summary": "Explain what a check looks for"},
+    {"name": "fix", "summary": "Emit PR-sized patches for failing checks"},
+    {"name": "list-checks", "summary": "List every known check"},
+    {"name": "init", "summary": "Drop a .agent-ready.toml"}
+  ]
+}

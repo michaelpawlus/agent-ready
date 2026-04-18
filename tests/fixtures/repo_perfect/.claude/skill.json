@@ -1,0 +1,6 @@
+{
+  "name": "perfect",
+  "description": "Fixture repo.",
+  "triggers": ["perfect"],
+  "commands": [{"name": "score", "summary": "Score"}]
+}

@@ -1,0 +1,7 @@
+[checks]
+disabled = []
+
+[weights]
+
+[ignore]
+paths = ["node_modules/**", "dist/**", ".venv/**", "build/**", "tests/fixtures/**"]
