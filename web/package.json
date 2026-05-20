@@ -1,0 +1,20 @@
+{
+  "name": "agent-ready-badge",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Hosted public-signals badge endpoint for agent-ready",
+  "scripts": {
+    "dev": "vercel dev",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vercel/node": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}

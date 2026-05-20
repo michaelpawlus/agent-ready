@@ -45,3 +45,28 @@ logic into the CLI -- that judgment lives in the skill layer.
 
 This repo has its own `.agent-ready.toml`. `agent-ready score .` on this repo
 should grade A.
+
+## Hosted Badge Endpoint (`web/`)
+
+A Vercel project under `web/` serves the hosted badge endpoint advertised in
+the README. Routes:
+
+- `GET /badge/{owner}/{repo}.svg` -- 302 to shields.io
+- `GET /badge/{owner}/{repo}.json` -- `public-signals-v1` scorecard
+- `GET /health` -- `{ok, version}`
+- `GET /` -- static landing page
+
+Scoring lives in `web/lib/score.ts` (pure function from GitHub + PyPI inputs
+to a letter grade). The endpoint never clones repos -- it derives an
+eight-signal subset from public APIs only.
+
+Local dev:
+
+    cd web
+    npm install
+    npm test          # vitest
+    npm run typecheck
+    npm run dev       # vercel dev (requires the Vercel CLI)
+
+Deploy: `cd web && vercel --prod`. Set `GITHUB_TOKEN` as a Vercel env var to
+lift the anonymous 60 req/hr rate limit if traffic warrants.
