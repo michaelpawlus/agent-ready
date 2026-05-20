@@ -10,6 +10,7 @@ from . import (
     cli_commands_doc,
     cli_entry_point,
     exit_codes_doc,
+    hosted_badge,
     json_flag,
     justfile_present,
     skill_manifest,
@@ -31,6 +32,7 @@ REGISTRY: dict[str, ProposeFn] = {
     "machine-interface.stderr-separation-documented": stderr_separation_doc.propose,
     "ergonomics.structured-error-format": structured_errors.propose,
     "documentation.cli-commands-in-claude-md": cli_commands_doc.propose,
+    "documentation.uses-hosted-badge": hosted_badge.propose,
 }
 
 

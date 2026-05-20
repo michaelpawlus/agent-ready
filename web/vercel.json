@@ -1,0 +1,41 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/badge/:owner/:repo.svg",
+      "destination": "/api/badge?owner=:owner&repo=:repo&format=svg"
+    },
+    {
+      "source": "/badge/:owner/:repo.json",
+      "destination": "/api/badge?owner=:owner&repo=:repo&format=json"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/health"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/badge/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=3600, stale-while-revalidate=86400"
+        },
+        {
+          "key": "X-Agent-Ready-Subset",
+          "value": "public-signals-v1"
+        }
+      ]
+    },
+    {
+      "source": "/health",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-ready"
-version = "0.1.0"
+version = "0.2.0"
 description = "Score a repo on agent-readiness and emit PR-sized fixes for failing checks"
 readme = "README.md"
 license = { file = "LICENSE" }

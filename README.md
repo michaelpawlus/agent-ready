@@ -4,7 +4,7 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/agent-ready.svg)](https://pypi.org/project/agent-ready/)
 [![CI](https://github.com/michaelpawlus/agent-ready/actions/workflows/ci.yml/badge.svg)](https://github.com/michaelpawlus/agent-ready/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![agent-ready](https://img.shields.io/badge/agent--ready-A%20(100%2F100)-brightgreen)](#badge-your-own-repo)
+[![agent-ready](https://agent-ready-badge.vercel.app/badge/michaelpawlus/agent-ready.svg)](https://agent-ready-badge.vercel.app/badge/michaelpawlus/agent-ready.json)
 
 > **Score any repo on how usable it is to an AI agent. Auto-fix the gaps.**
 
@@ -68,22 +68,40 @@ Sweep a whole portfolio and filter to anything below a B:
 
 ## Badge your own repo
 
-Once you've scored an A, advertise it. Drop this in the target repo's README:
+Two ways to advertise the score:
+
+### Hosted badge (recommended)
+
+The badge endpoint re-scores on demand from public GitHub + PyPI signals and
+serves an SVG via shields.io. Drop this in any repo's README:
+
+```markdown
+[![agent-ready](https://agent-ready-badge.vercel.app/badge/OWNER/REPO.svg)](https://agent-ready-badge.vercel.app/badge/OWNER/REPO.json)
+```
+
+`agent-ready fix . --check documentation.uses-hosted-badge --dry-run` will
+generate the exact patch for the current repo, filling in `OWNER/REPO` from
+your `origin` remote.
+
+The hosted endpoint computes a **`public-signals-v1`** subset (eight binary
+checks readable from the GitHub Contents API and PyPI JSON API) — not the full
+~30-check rubric. Run `agent-ready score .` locally for the full grade. The
+endpoint returns an `X-Agent-Ready-Subset: public-signals-v1` header so
+downstream consumers know it's an approximation.
+
+JSON scorecard:
+
+```bash
+curl https://agent-ready-badge.vercel.app/badge/OWNER/REPO.json | jq .grade
+```
+
+### Static badge
+
+If you'd rather pin the grade you locked in, use a plain shields.io URL:
 
 ```markdown
 [![agent-ready](https://img.shields.io/badge/agent--ready-A-brightgreen)](https://github.com/michaelpawlus/agent-ready)
 ```
-
-HTML variant (if you need to control width / alignment):
-
-```html
-<a href="https://github.com/michaelpawlus/agent-ready">
-  <img src="https://img.shields.io/badge/agent--ready-A-brightgreen" alt="agent-ready: A">
-</a>
-```
-
-A hosted endpoint at `https://agent-ready.dev/badge/{owner}/{repo}.svg` that
-scores on demand is on the roadmap (see `CHANGELOG.md`).
 
 ## Programmatic use
 
